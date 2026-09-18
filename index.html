@@ -14,6 +14,7 @@
   ========================================================== */
   :root{
     --bg:        #05041a;
+    --bg-alt:    #1a155d;
     --panel:     #140f3d;
     --panel-alt: #1b1450;
     --grid:      #392e8f;
@@ -26,7 +27,7 @@
     --black:     #000000;
 
     --font-mono: ui-monospace, "Courier New", Courier, monospace;
-    --container: 1120px;
+    --container: 1300px;
   }
 
   *,*::before,*::after{ box-sizing:border-box; }
@@ -38,14 +39,16 @@
 
   body{
     margin:0;
-    background: var(--bg);
-    background-image:
+    /* Градиент сверху вниз от --bg к --grid */
+    background-image: 
+      linear-gradient(to bottom, var(--bg), var(--bg-alt)),
       repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px);
     color: var(--ink);
     font-family: var(--font-mono);
     font-size: 15px;
     line-height: 1.6;
   }
+
 
   /* ретро-скроллбар */
   ::-webkit-scrollbar{ width:16px; }
@@ -62,14 +65,14 @@
     color: var(--ink);
     text-shadow: 2px 2px 0 var(--black), 4px 4px 0 rgba(255,46,154,0.35);
   }
-  h1{ font-size: clamp(1.9rem, 4.6vw, 3.1rem); }
+  h1{ font-size: clamp(1.71rem, 3.96vw, 2.79rem); }
   h2{ font-size: clamp(1.4rem, 2.8vw, 2rem); }
   h3{ font-size: 1rem; }
 
   p{ margin:0 0 1em; max-width:64ch; color: var(--ink-dim); }
   a{ color: var(--cyan); }
 
-  .container{ max-width:var(--container); margin:0 auto; padding:0 clamp(1rem,4vw,2.2rem); }
+  .container{ max-width:var(--container); margin:0 auto; padding:0 }
   section{ padding: clamp(2.6rem, 6vw, 4.6rem) 0; }
 
   .tag{
@@ -94,9 +97,15 @@
     text-shadow:none;
   }
   .win-title .lights{ display:flex; gap:5px; }
-  .win-title .lights span{ width:12px; height:12px; background:#000; border:2px solid #000; display:block; }
+  .win-title .lights span{ width:12px; height:12px; background:#000; border:2px solid #000; display:block; line-height: 5px; padding-bottom: 3px;}
   .win-body{ padding: clamp(1.2rem, 3vw, 2rem); }
-
+  .win-title span {
+    background: var(--black);
+    color: var(--cyan);
+    padding: 0.2em 0.6em;
+    text-transform: uppercase;
+  }
+  
   /* ==========================================================
      ШАПКА / ТУЛБАР
   ========================================================== */
@@ -210,7 +219,7 @@
      МАРШРУТ
   ========================================================== */
   .route-list{ list-style:none; margin:2rem 0 0; padding:0; position:relative; }
-  .route-list::before{ content:""; position:absolute; top:4px; bottom:4px; left:17px; width:4px; background:repeating-linear-gradient(180deg, var(--cyan) 0 6px, transparent 6px 12px); }
+  .route-list::before{ content:""; position:absolute; top:4px; bottom:4px; left:15px; width:4px; background:repeating-linear-gradient(180deg, var(--cyan) 0 6px, transparent 6px 12px); }
   .route-item{ position:relative; padding:0 0 2rem 3.6rem; }
   .route-item:last-child{ padding-bottom:0; }
   .route-item::before{ content:""; position:absolute; left:8px; top:0; width:18px; height:18px; background:var(--magenta); border:3px solid var(--black); }
@@ -229,7 +238,7 @@
     border-top: 6px solid var(--dir-color, var(--cyan));
     padding:1.4rem 1.3rem;
   }
-  .direction-tag{ display:inline-block; font-size:0.72rem; font-weight:800; color:#000; background:var(--dir-color,var(--cyan)); padding:0.2em 0.5em; margin-bottom:0.7em; letter-spacing:0.04em; }
+  .direction-tag{ display:inline-block; font-size:1rem; font-weight:800; color:#000; background:var(--dir-color,var(--cyan)); padding:0.2em 0.5em; margin-bottom:0.7em; letter-spacing:0.04em; }
   .direction-card p{ font-size:0.9rem; margin-bottom:0.7em; }
   .direction-tasks{ margin:0; padding-left:1.2em; color:var(--ink-dim); font-size:0.85rem; }
   .direction-tasks li{ margin-bottom:0.3em; }
@@ -264,8 +273,8 @@
      КЕЙСЫ
   ========================================================== */
   .case-card{ background:var(--panel-alt); border:3px solid var(--black); box-shadow:6px 6px 0 var(--black); padding:1.4rem 1.3rem; }
-  .case-role{ font-size:0.78rem; color:var(--yellow); margin-bottom:0.5em; }
-  .cases-note{ margin-top:1.6rem; font-size:0.78rem; color:var(--ink-dim); }
+  .case-role{ font-size:0.9rem; color:var(--yellow); margin-bottom:0.5em; }
+  .cases-note{ margin-top:1.6rem; font-size:0.8rem; color:var(--ink-dim); }
 
   /* ==========================================================
      FAQ
@@ -380,6 +389,10 @@
     </div>
   </div>
 
+
+</header>
+
+<main id="main">
   <div class="marquee-bar" aria-hidden="true">
     <div class="marquee-track">
       <span>*** ДОБРО ПОЖАЛОВАТЬ В IT.KRU ***</span>
@@ -392,15 +405,11 @@
       <span>ПРАКТИКА НА РЕАЛЬНЫХ ЗАДАЧАХ КОМПАНИЙ ***</span>
     </div>
   </div>
-</header>
-
-<main id="main">
-
   <!-- 1. ПЕРВЫЙ ЭКРАН -->
   <section class="hero">
     <div class="container hero-grid">
       <div class="win">
-        <div class="win-title"><span>MARSHRUT.EXE — ГЛАВНЫЙ ЭКРАН</span><span class="lights"><span></span><span></span><span></span></span></div>
+        <div class="win-title"><span>MARSHRUT.EXE — ГЛАВНЫЙ ЭКРАН</span><span class="lights"><span>—</span><span>□</span><span>×</span></span></div>
         <div class="win-body">
           <span class="tag">PRACTICE.SYS ЗАГРУЖЕН</span>
           <h1>От интереса к профессии — к реальному проектному опыту.</h1>
@@ -415,7 +424,7 @@
       </div>
 
       <div class="hero-visual win loader-card">
-        <div class="win-title"><span>LOADING...</span><span class="lights"><span></span><span></span><span></span></span></div>
+        <div class="win-title"><span>LOADING...</span><span class="lights"><span>—</span><span>□</span><span>×</span></span></div>
         <div class="win-body">
           <div class="cube-scene">
             <div class="cube">
@@ -437,7 +446,7 @@
   <!-- 2. МАРШРУТ -->
   <section id="route">
     <div class="container win">
-      <div class="win-title"><span>MARSHRUT.SYS</span><span class="lights"><span></span><span></span><span></span></span></div>
+      <div class="win-title"><span>MARSHRUT.SYS</span><span class="lights"><span>—</span><span>□</span><span>×</span></span></div>
       <div class="win-body">
         <span class="tag">6 ШАГОВ</span>
         <h2>От выбора роли до подтверждённого опыта</h2>
@@ -577,7 +586,7 @@
   <!-- 9. ЗАЯВКА -->
   <section id="apply">
     <div class="container win">
-      <div class="win-title"><span>APPLY.FORM</span><span class="lights"><span></span><span></span><span></span></span></div>
+      <div class="win-title"><span>APPLY.FORM</span><span class="lights"><span>—</span><span>□</span><span>×</span></span></div>
       <div class="win-body">
         <h2>Оставьте заявку — мы свяжемся в течение нескольких рабочих дней</h2>
 
